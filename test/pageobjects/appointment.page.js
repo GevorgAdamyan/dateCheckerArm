@@ -24,7 +24,7 @@ class AppointmentPage extends Page {
 
   async checkCalendar() {
     let appointmentField = await this.appointmentDate;
-    await appointmentField.waitForDisplayed()
+    await appointmentField.waitForClickable()
     await appointmentField.click();
     let appointmentDate;
     let newArr = [];
@@ -44,13 +44,6 @@ class AppointmentPage extends Page {
       await browser.pause(200);
     }
     let dates = [...new Set(newArr)];
-    dynamicData.result = dates;
-    dynamicData.mailSubject = "New appointment date";
-    dynamicData.mailContent = `Appointment dates has been changed!!!\n
-            Info: \n
-            Start Time: ${dynamicData.startTime}\n
-            End Time: ${dynamicData.endTime}\n
-               Available dates: ${dynamicData.result}`;
     return dates;
   }
 }

@@ -13,10 +13,10 @@ class ActionPage extends Page {
 
   async navigateToAppointmentSection() {
     let item = await this.rescheduleAppointment;
-    await item.waitForDisplayed();
+    await item.waitForClickable();
     await item.click();
     let btn = await this.rescheduleAppointmentBtn;
-    await btn.waitForDisplayed();
+    await btn.waitForClickable();
     await btn.click();
   }
 }
