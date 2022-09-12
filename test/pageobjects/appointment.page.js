@@ -24,7 +24,7 @@ class AppointmentPage extends Page {
 
   async checkCalendar() {
     let appointmentField = await this.appointmentDate;
-    await appointmentField.waitForClickable()
+    await await browser.pause(500);
     await appointmentField.click();
     let appointmentDate;
     let newArr = [];
