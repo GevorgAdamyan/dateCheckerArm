@@ -32,7 +32,10 @@ class AppointmentPage extends Page {
       let date = await this.activeDate;
       if (date.length !== 0) {
         for (let j = 0; j < date.length; j++) {
-          let month = await date[j].getAttribute("data-month");
+          let m = await date[j].getAttribute("data-month");
+          let n = parseInt(m);
+          let a = n + 1;
+          let month = a.toString();
           let year = await date[j].getAttribute("data-year");
           let dayText = await date[j].$("a");
           let day = await dayText.getText();
