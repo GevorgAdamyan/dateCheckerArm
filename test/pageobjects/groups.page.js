@@ -8,7 +8,7 @@ class GroupsPage extends Page {
 
     async clickOnContinueBtn() {
         let btn = await this.continueBtn;
-        await btn.waitForClickable();
+        await browser.pause(500);
         await btn.click();
     }
 }
