@@ -1,4 +1,5 @@
 const App = require("../pageobjects/application");
+const helpers = require("../support/helpers");
 
 describe("Appointment application", () => {
   beforeEach(async () => {

@@ -49,7 +49,8 @@ class Helpers {
     let areTheSame = await this.compareLastTwoRuns();
     dynamicData.shouldBeSent = !areTheSame;
     await this.createEmailBody(sheetName);
-    let data = [dynamicData.startTime, dynamicData.newRunResults.toString(), 'Pass', !areTheSame, dynamicData.newLoginIndex]
+    let data = [dynamicData.startTime, dynamicData.newRunResults.toString(), 'Pass', !areTheSame, dynamicData.newLoginIndex];
+    await this.clearAllData('data/data.xlsx', sheetName)
     await excelEditor.addRowToExcel('data/data.xlsx', sheetName, data)
   }
 
@@ -81,8 +82,16 @@ class Helpers {
       changed = true;
       dynamicData.shouldBeSent = true;
     }
-    let data = [dynamicData.startTime, 'There are no available appointments', 'Pass', changed, dynamicData.newLoginIndex]
+    let data = [dynamicData.startTime, 'There are no available appointments', 'Pass', changed, dynamicData.newLoginIndex];
+    await this.clearAllData('data/data.xlsx', sheetName)
     await excelEditor.addRowToExcel('data/data.xlsx', nation, data)
+  }
+
+  async clearAllData(filePath, sheetName) {
+    let now = new Date().toString();
+    if (now.includes('Tue')) {
+      await excelEditor.clearData(filePath, sheetName);
+    }
   }
 }
 

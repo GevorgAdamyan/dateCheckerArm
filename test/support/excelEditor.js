@@ -69,6 +69,22 @@ class ExcelEditor {
     await this.autofitCells(filePath, sheetName);
   }
 
+  async deleteRow(filePath, sheetName, rowNumber) {
+    let sheet = await this.getWorkSheet(filePath, sheetName);
+    sheet.spliceRows(rowNumber - 1, 1)
+    await workbook.xlsx.writeFile(filePath);
+  }
+
+  async clearData(filePath, sheetName) {
+    let nomberOfRows = await this.getLastLine(filePath, sheetName);
+    if (nomberOfRows > 150) {
+      for (let i = nomberOfRows; i > 2; i--) {
+        await this.deleteRow(filePath, sheetName, i)
+      }
+    }
+    await workbook.xlsx.writeFile(filePath);
+  }
+
   async autofitCells(filePath, sheetName) {
     let sheet = await this.getWorkSheet(filePath, sheetName);
     sheet.columns.forEach(function (column, i) {
