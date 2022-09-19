@@ -1,6 +1,8 @@
 module.exports = {
     getCurrentTime() {
-        return new Date().toLocaleString('hy-AM')
+        return new Date().toLocaleString('hy-AM', {
+            timeZone: 'Asia/Yerevan'
+        })
     },
 
     compareArrays(a, b) {
