@@ -83,7 +83,7 @@ class Helpers {
       dynamicData.shouldBeSent = true;
     }
     let data = [dynamicData.startTime, 'There are no available appointments', 'Pass', changed, dynamicData.newLoginIndex];
-    await this.clearAllData('data/data.xlsx', sheetName)
+    await this.clearAllData('data/data.xlsx', nation)
     await excelEditor.addRowToExcel('data/data.xlsx', nation, data)
   }
 
