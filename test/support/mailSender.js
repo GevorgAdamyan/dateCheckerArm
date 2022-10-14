@@ -5,9 +5,13 @@ const dynamicData = require('./dynamicData');
 class MailSender {
     async sendEmailAboutDateChange(...recepients) {
         let transporter = nodemailer.createTransport({
-            host: "smtp.localhost",
-            port: 25,
+            host: "smtp.office365.com",
+            port: 587,
             secure: false,
+            auth: {
+                user: 'datacheckernotif@outlook.com',
+                pass: 'DataCheckerN123456'
+            },
             tls: { 
                 rejectUnauthorized: false 
             } 
