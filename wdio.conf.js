@@ -50,7 +50,7 @@ exports.config = {
 
     mochaOpts: {
         ui: 'bdd',
-        timeout: 1200000
+        timeout: 300000
     },
 
 }
