@@ -13,21 +13,31 @@ describe("Appointment application", () => {
       App.staticData.systemPasswordArm
     );
     await App.groupsPage.clickOnContinueBtn();
-    await App.actionPage.navigateToAppointmentSection();
-    let noAvailableDateError = await App.appointmentPage.noAvailableDateError;
-    await browser.pause(1000);
-    let isDisplayed = await noAvailableDateError.isDisplayed();
-    if (isDisplayed) {
-      await App.helpers.setDataForFinalActionsFailure('Arm');
-      if (App.dynamicData.shouldBeSent) {
-        await App.mailSender.sendEmailAboutDateChange(App.staticData.recepients);
+    await browser.pause(1000)
+    let isUserValid = await App.actionPage.isRescheduleButtonDisplayed();
+    if (isUserValid) {
+      await App.actionPage.navigateToAppointmentSection();
+      let noAvailableDateError = await App.appointmentPage.noAvailableDateError;
+      await browser.pause(1000);
+      let isDisplayed = await noAvailableDateError.isDisplayed();
+      if (isDisplayed) {
+        await App.helpers.setDataForFinalActionsFailure('Arm');
+        if (App.dynamicData.shouldBeSent) {
+          await App.mailSender.sendEmailAboutDateChange(App.staticData.recepients);
+        }
+      } else {
+        App.dynamicData.newRunResults = await App.appointmentPage.checkCalendar();
+        await App.helpers.setDataForFinalActionsSuccess('Arm');
+        if (App.dynamicData.shouldBeSent) {
+          await App.mailSender.sendEmailAboutDateChange(App.staticData.recepients);
+        }
       }
     } else {
-      App.dynamicData.newRunResults = await App.appointmentPage.checkCalendar();
-      await App.helpers.setDataForFinalActionsSuccess('Arm');
+      App.helpers.setDataForFinalActionsUserIssue('Arm');
       if (App.dynamicData.shouldBeSent) {
         await App.mailSender.sendEmailAboutDateChange(App.staticData.recepients);
       }
     }
+
   });
 });

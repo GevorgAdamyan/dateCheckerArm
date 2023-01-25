@@ -87,6 +87,21 @@ class Helpers {
     await excelEditor.addRowToExcel('data/data.xlsx', nation, data)
   }
 
+  async setDataForFinalActionsUserIssue(nation) {
+    let rowNumber = await excelEditor.getLastLine('data/data.xlsx', nation);
+    dynamicData.endTime = utils.getCurrentTime();
+    dynamicData.mailSubject = `User issue (${nation})`;
+    dynamicData.mailContent = `There following user has an issue. Please check it (${nation})!!!\n
+                               Credentials: \n
+                                  Username: ${staticData.systemUsernameArm}\n
+                                  Password: ${staticData.systemPasswordArm}\n`
+    let changed = false;
+    dynamicData.shouldBeSent = true;
+    let data = [dynamicData.startTime, 'User issue', 'Fail', changed, dynamicData.newLoginIndex];
+    await this.clearAllData('data/data.xlsx', nation)
+    await excelEditor.addRowToExcel('data/data.xlsx', nation, data)
+  }
+
   async clearAllData(filePath, sheetName) {
     let now = new Date().toString();
     if (now.includes('Tue')) {
