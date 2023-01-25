@@ -88,8 +88,6 @@ class Helpers {
   }
 
   async setDataForFinalActionsUserIssue(nation) {
-    let rowNumber = await excelEditor.getLastLine('data/data.xlsx', nation);
-    dynamicData.endTime = utils.getCurrentTime();
     dynamicData.mailSubject = `User issue (${nation})`;
     dynamicData.mailContent = `There following user has an issue. Please check it (${nation})!!!\n
                                Credentials: \n

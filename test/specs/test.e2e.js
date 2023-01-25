@@ -32,12 +32,14 @@ describe("Appointment application", () => {
           await App.mailSender.sendEmailAboutDateChange(App.staticData.recepients);
         }
       }
-    } else {
+    } else if (!isUserValid) {
       App.helpers.setDataForFinalActionsUserIssue('Arm');
+      
       if (App.dynamicData.shouldBeSent) {
         await App.mailSender.sendEmailAboutDateChange(App.staticData.recepients);
       }
     }
-
+    console.log(isUserValid);
+    console.log(App.dynamicData.shouldBeSent);
   });
 });

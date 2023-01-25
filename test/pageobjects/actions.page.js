@@ -11,13 +11,14 @@ class ActionPage extends Page {
     );
   }
 
-  get rescheduleBtn() {
-    return $('//*[text()="Հարցազրույցի համար վերստին պայմանավորվածություն ձեռք բերել"]')
-  }
-
   async isRescheduleButtonDisplayed() {
-    let btn = await this.rescheduleBtn;
-    return btn.isDisplayed();
+    let btn = await this.rescheduleAppointment;
+    let txt = await btn.getText();
+    if(txt === 'Հարցազրույցի համար վերստին պայմանավորվածություն ձեռք բերել') {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   async navigateToAppointmentSection() {
